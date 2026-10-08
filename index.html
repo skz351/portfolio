@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swan — Création de sites internet</title>
+<meta name="description" content="Swan crée des sites vitrines modernes et adaptés au mobile pour les commerces, artisans et indépendants. Site complet à partir de 200 €, aperçu avant de vous engager.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#533afd;--primary-deep:#4434d4;--primary-press:#2e2b8c;--primary-soft:#665efd;--primary-sub:#b9b9f9;
+  --navy:#1c1e54;--ink:#0d253d;--ink-2:#273951;--mute:#64748d;
+  --canvas:#fff;--soft:#f6f9fc;--cream:#f5e9d4;--hair:#e3e8ee;
+  --ruby:#ea2261;--magenta:#f96bee;
+  --sh1:0 1px 3px rgba(0,55,112,.08);
+  --sh2:0 8px 24px rgba(0,55,112,.08),0 2px 6px rgba(0,55,112,.04);
+  --sh3:0 30px 60px -12px rgba(13,37,61,.25),0 18px 36px -18px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,sans-serif;font-weight:300;font-size:15px;line-height:1.5;color:var(--ink);background:var(--canvas);font-feature-settings:"ss01";-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ---------- fond animé (souris) ---------- */
+#mesh{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.veil{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.1) 0%,rgba(255,255,255,.45) 45%,rgba(255,255,255,.9) 100%)}
+main,header,footer{position:relative;z-index:1}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:0;z-index:20;transition:background .3s,box-shadow .3s,backdrop-filter .3s}
+header.scrolled{background:rgba(255,255,255,.78);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 var(--hair)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:500;font-size:17px;letter-spacing:-.3px}
+.logo i{width:30px;height:30px;border-radius:9px;background:conic-gradient(from 200deg,var(--primary),var(--magenta),#ff9a5a,var(--primary));display:block;box-shadow:var(--sh1)}
+.links{display:flex;gap:28px;align-items:center;font-size:15px;color:var(--ink-2)}
+.links a:not(.btn):hover{color:var(--primary)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:9999px;padding:10px 18px;font-weight:400;font-size:15px;line-height:1;transition:transform .2s,background .2s,box-shadow .2s;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--primary);color:#fff;box-shadow:0 6px 18px -6px rgba(83,58,253,.6)}
+.btn-primary:hover{background:var(--primary-deep);transform:translateY(-1px)}
+.btn-primary:active{background:var(--primary-press)}
+.btn-ghost{background:rgba(255,255,255,.7);color:var(--primary);border-color:var(--primary)}
+.btn-ghost:hover{background:#fff;transform:translateY(-1px)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer}
+.burger span{display:block;width:20px;height:1.5px;background:var(--ink);margin:5px auto;transition:.3s}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 120px;min-height:calc(100vh - 68px);display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center}
+.hero-grid>*,.work>*{min-width:0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid rgba(83,58,253,.18);color:var(--primary-deep);border-radius:9999px;padding:6px 12px;font-size:13px;font-weight:400}
+.eyebrow b{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgba(34,197,94,.18);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(34,197,94,0)}}
+h1{font-size:64px;font-weight:300;line-height:1.03;letter-spacing:-1.8px;margin:22px 0 22px}
+h1 .grad{background:linear-gradient(90deg,var(--primary) 0%,var(--magenta) 50%,#ff8a4c 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:shine 6s ease-in-out infinite alternate}
+@keyframes shine{to{background-position:100% 0}}
+.lead{font-size:19px;line-height:1.55;color:var(--ink-2);max-width:520px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.trust{display:flex;gap:24px;flex-wrap:wrap;margin-top:36px;font-size:14px;color:var(--mute)}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust svg{color:var(--primary)}
+
+/* stack de mockups */
+.stack{position:relative;height:520px;perspective:1400px}
+.mock{position:absolute;border-radius:14px;overflow:hidden;background:#fff;box-shadow:var(--sh3);transition:transform .25s ease-out}
+.mock .bar{height:28px;background:#f1f4f8;display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--hair)}
+.mock .bar i{width:9px;height:9px;border-radius:50%;background:#ff5f57}
+.mock .bar i:nth-child(2){background:#febc2e}.mock .bar i:nth-child(3){background:#28c840}
+.mock .bar em{margin-left:10px;font-style:normal;font-size:11px;color:var(--mute);background:#fff;border-radius:6px;padding:3px 10px;flex:1;max-width:220px}
+.mock.a{width:78%;top:0;right:0}
+.mock.b{width:66%;bottom:0;left:0}
+.phone{position:absolute;width:150px;right:6%;bottom:-10px;border-radius:26px;border:6px solid #0d1525;overflow:hidden;box-shadow:var(--sh3);background:#0d1525;transition:transform .25s ease-out}
+.phone img{border-radius:18px}
+
+/* ---------- sections ---------- */
+section{padding:110px 0}
+.kicker{font-size:13px;font-weight:500;color:var(--primary);letter-spacing:.2px;text-transform:uppercase}
+h2{font-size:46px;font-weight:300;line-height:1.1;letter-spacing:-1px;margin:12px 0 16px;max-width:760px}
+.sub{font-size:18px;color:var(--ink-2);max-width:620px}
+.bg-soft{background:rgba(246,249,252,.86);backdrop-filter:blur(6px)}
+
+/* réalisations */
+.work{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;margin-top:64px}
+.work:nth-of-type(even){grid-template-columns:1fr 1.25fr}
+.work:nth-of-type(even) .visual{order:2}
+.visual{position:relative;padding:0 0 40px 0}
+.visual .mock{position:relative;width:100%}
+.visual .phone{right:-14px;bottom:0;width:132px}
+.tilt{transform-style:preserve-3d;will-change:transform}
+.tag{display:inline-block;background:var(--primary-sub);color:var(--primary-deep);font-size:11px;font-weight:500;letter-spacing:.3px;border-radius:9999px;padding:4px 10px;text-transform:uppercase}
+.work h3{font-size:34px;font-weight:300;letter-spacing:-.7px;line-height:1.1;margin:14px 0 12px}
+.work p{color:var(--ink-2);font-size:16px}
+.feat{list-style:none;margin:22px 0 26px;display:grid;gap:10px}
+.feat li{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+.feat li:before{content:"";flex:0 0 18px;height:18px;margin-top:1px;border-radius:50%;background:var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/11px no-repeat}
+.status{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:8px}
+
+/* offre */
+.offer{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.card{background:#fff;border:1px solid var(--hair);border-radius:14px;padding:32px;box-shadow:var(--sh1);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
+.card h4{font-size:20px;font-weight:300;letter-spacing:-.2px}
+.price{font-size:44px;font-weight:300;letter-spacing:-1.2px;margin:14px 0 4px;font-feature-settings:"tnum"}
+.price small{font-size:15px;color:var(--mute);letter-spacing:0}
+.card p{color:var(--ink-2);font-size:15px}
+.card ul{list-style:none;margin:20px 0 0;display:grid;gap:9px;font-size:14px;color:var(--ink-2)}
+.card ul li:before{content:"→ ";color:var(--primary)}
+.card.feat-card{background:var(--navy);color:#fff;border-color:var(--navy)}
+.card.feat-card p,.card.feat-card ul{color:#c9cdf0}
+.card.feat-card .price small{color:#a9aee0}
+.card.feat-card:after{content:"";position:absolute;inset:-40% -40% auto auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(249,107,238,.45),transparent 65%);filter:blur(10px)}
+.pill-top{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.14);color:#fff;font-size:11px;border-radius:9999px;padding:4px 10px;font-weight:400}
+.note{margin-top:22px;font-size:14px;color:var(--mute)}
+
+/* méthode */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;counter-reset:s}
+.step{background:var(--cream);border-radius:14px;padding:28px;position:relative}
+.step:before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:var(--primary);font-weight:500;font-size:15px;margin-bottom:18px;box-shadow:var(--sh1)}
+.step h5{font-size:18px;font-weight:400;margin-bottom:8px;letter-spacing:-.2px}
+.step p{font-size:14px;color:var(--ink-2)}
+
+/* contact */
+.contact{background:var(--navy);color:#fff;border-radius:22px;padding:72px 56px;position:relative;overflow:hidden;text-align:center}
+.contact h2{margin:12px auto 14px;color:#fff}
+.contact .sub{color:#c9cdf0;margin:0 auto}
+.contact .kicker{color:#b9b9f9}
+.contact .cta{justify-content:center}
+.contact .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.contact .btn-ghost:hover{background:rgba(255,255,255,.08)}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(60px);opacity:.55;pointer-events:none}
+.glow.g1{background:var(--primary);top:-260px;left:-120px}
+.glow.g2{background:var(--ruby);bottom:-300px;right:-120px;opacity:.4}
+.contact>*:not(.glow){position:relative}
+
+footer{padding:40px 0 48px;font-size:13px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* ---------- animations au scroll ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+.hero .reveal{transition-duration:1s}
+.float{animation:float 7s ease-in-out infinite}
+.float.slow{animation-duration:9s;animation-delay:-3s}
+@keyframes float{50%{translate:0 -10px}}
+
+/* curseur halo */
+#halo{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(83,58,253,.16),transparent 60%);transform:translate(-50%,-50%);left:-999px;top:-999px;transition:opacity .3s}
+
+/* ---------- responsive ---------- */
+@media (max-width:1023px){
+  h1{font-size:50px;letter-spacing:-1.3px}
+  h2{font-size:38px}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .stack{height:440px;max-width:620px}
+  .offer{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .work,.work:nth-of-type(even){grid-template-columns:1fr}
+  .work:nth-of-type(even) .visual{order:0}
+}
+@media (max-width:767px){
+  .wrap{padding:0 16px}
+  .links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--hair);padding:8px 16px 16px}
+  .links.open{display:flex}
+  .links a{padding:12px 0;border-bottom:1px solid var(--hair)}
+  .links .btn{margin-top:12px;justify-content:center;border:0}
+  .burger{display:block}
+  header{background:rgba(255,255,255,.85);backdrop-filter:blur(12px)}
+  .hero{padding:48px 0 72px;min-height:auto}
+  h1{font-size:38px;letter-spacing:-1px}
+  .lead{font-size:17px}
+  h2{font-size:30px;letter-spacing:-.6px}
+  section{padding:72px 0}
+  .stack{height:320px}
+  .phone{width:100px;border-width:4px;border-radius:18px}
+  .phone img{border-radius:13px}
+  .visual .phone{width:96px;right:-4px}
+  .offer,.steps{grid-template-columns:1fr}
+  .work h3{font-size:28px}
+  .contact{padding:48px 22px;border-radius:18px}
+  .btn{padding:13px 20px}
+  #halo{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="mesh" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+<div id="halo" aria-hidden="true"></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="logo" href="#"><i></i>Swan</a>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="links">
+      <a href="#realisations">Réalisations</a>
+      <a href="#offre">Tarifs</a>
+      <a href="#methode">Comment ça marche</a>
+      <a class="btn btn-primary" href="#contact">Parlons de votre site <span class="arr">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow reveal"><b></b>Disponible pour de nouveaux projets</span>
+        <h1 class="reveal d1">Un site internet <span class="grad">qui vous ressemble</span>, sans vous ruiner.</h1>
+        <p class="lead reveal d2">Je crée des sites vitrines modernes et adaptés au mobile pour les commerces, artisans et indépendants. Vous voyez un aperçu de votre site avant de vous engager.</p>
+        <div class="cta reveal d3">
+          <a class="btn btn-primary" href="#contact">Demander mon aperçu <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#realisations">Voir mes réalisations</a>
+        </div>
+        <div class="trust reveal d4">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Site complet dès 200 €</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/></svg>Parfait sur mobile</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Visible sur Google</span>
+        </div>
+      </div>
+      <div class="stack reveal d2" id="stack">
+        <div class="mock a float" data-depth="18"><div class="bar"><i></i><i></i><i></i><em>fcgueret.netlify.app</em></div><img src="img/fcgueret-desktop.jpg" alt="Page d'accueil du site du FC Guéret"></div>
+        <div class="mock b float slow" data-depth="30"><div class="bar"><i></i><i></i><i></i><em>delikat · Guéret</em></div><img src="img/delikat-desktop.jpg" alt="Page d'accueil du site de l'institut Délikat'"></div>
+        <div class="phone float" data-depth="44"><img src="img/delikat-mobile.jpg" alt="Le site Délikat' sur téléphone"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉALISATIONS -->
+  <section id="realisations" class="bg-soft">
+    <div class="wrap">
+      <div class="kicker reveal">Réalisations</div>
+      <h2 class="reveal d1">Deux sites, deux univers, la même exigence.</h2>
+      <p class="sub reveal d2">Chaque site est dessiné sur mesure : couleurs, ambiance et contenu sont pensés pour l'activité et pour les clients qui vont le visiter.</p>
+
+      <article class="work">
+        <div class="visual reveal">
+          <div class="tilt">
+            <div class="mock"><div class="bar"><i></i><i></i><i></i><em>fcgueret.netlify.app</em></div><img src="img/fcgueret-desktop.jpg" alt="Site du FC Guéret sur ordinateur" loading="lazy"></div>
+            <div class="phone"><img src="img/fcgueret-mobile.jpg" alt="Site du FC Guéret sur téléphone" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="reveal d1">
+          <span class="tag">Club sportif · Guéret (23)</span>
+          <h3>FC Guéret</h3>
+          <p>Le site officiel d'un club de football amateur, avec un style noir et or qui reprend l'identité du club.</p>
+          <ul class="feat">
+            <li>Calendrier, résultats et classement mis à jour par le club</li>
+            <li>Équipes, effectif, école de foot et galerie photos</li>
+            <li>Boutique en ligne et pages sponsors &amp; partenaires</li>
+            <li>Espace d'administration simple pour publier sans technique</li>
+          </ul>
+          <a class="btn btn-ghost" href="https://fcgueret.netlify.app" target="_blank" rel="noopener">Voir le site en ligne <span class="arr">→</span></a>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="visual reveal">
+          <div class="tilt">
+            <div class="mock"><div class="bar"><i></i><i></i><i></i><em>delikat · institut de beauté</em></div><img src="img/delikat-desktop.jpg" alt="Site de l'institut Délikat' sur ordinateur" loading="lazy"></div>
+            <div class="phone"><img src="img/delikat-mobile.jpg" alt="Site de l'institut Délikat' sur téléphone" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="reveal d1">
+          <span class="tag">Institut de beauté · Guéret (23)</span>
+          <h3>Délikat'</h3>
+          <p>Un site vitrine élégant et chaleureux pour un institut de beauté, pensé pour donner envie de prendre rendez-vous.</p>
+          <ul class="feat">
+            <li>Prestations et tarifs présentés par univers</li>
+            <li>Albums de réalisations avant/après</li>
+            <li>Cartes cadeaux achetables en ligne</li>
+            <li>Horaires du jour, avis Google et appel en un clic</li>
+          </ul>
+          <span class="status"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Mise en ligne prochainement</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- OFFRE -->
+  <section id="offre">
+    <div class="wrap">
+      <div class="kicker reveal">Tarifs</div>
+      <h2 class="reveal d1">Des prix clairs, sans mauvaise surprise.</h2>
+      <p class="sub reveal d2">Vous savez exactement ce que vous payez, et vous voyez votre site avant de vous engager.</p>
+      <div class="offer">
+        <div class="card reveal">
+          <h4>Aperçu</h4>
+          <div class="price">20 €</div>
+          <p>Je commence votre site et je vous montre le résultat avant que vous vous décidiez.</p>
+          <ul><li>Déduit des 200 € si vous continuez</li><li>Aucun engagement</li></ul>
+        </div>
+        <div class="card feat-card reveal d1">
+          <span class="pill-top">Le plus demandé</span>
+          <h4>Site complet</h4>
+          <div class="price">200 €</div>
+          <p>Votre site vitrine, de la conception à la mise en ligne.</p>
+          <ul><li>Design unique, adapté au mobile</li><li>Pages, photos, horaires, contact, plan</li><li>Bases du référencement Google</li><li>Nom de domaine inclus la 1re année</li></ul>
+        </div>
+        <div class="card reveal d2">
+          <h4>Suivi (facultatif)</h4>
+          <div class="price">20 € <small>/ mois</small></div>
+          <p>Je m'occupe de votre site et je mets à jour vos infos quand vous le souhaitez.</p>
+          <ul><li>Horaires, photos, nouveautés</li><li>Sans engagement</li></ul>
+        </div>
+      </div>
+      <p class="note reveal">Nom de domaine : 15 €/an à partir de la 2e année.</p>
+    </div>
+  </section>
+
+  <!-- MÉTHODE -->
+  <section id="methode" class="bg-soft">
+    <div class="wrap">
+      <div class="kicker reveal">Comment ça marche</div>
+      <h2 class="reveal d1">Votre site en ligne, en quatre étapes simples.</h2>
+      <div class="steps">
+        <div class="step reveal"><h5>On échange</h5><p>Vous me parlez de votre activité, de vos clients et du style que vous aimez.</p></div>
+        <div class="step reveal d1"><h5>Je crée l'aperçu</h5><p>Je commence votre site et je vous montre une première version.</p></div>
+        <div class="step reveal d2"><h5>On ajuste</h5><p>Vous me dites ce qu'il faut changer, je modifie jusqu'à ce que ça vous plaise.</p></div>
+        <div class="step reveal d3"><h5>Mise en ligne</h5><p>Votre site est en ligne avec votre nom de domaine, prêt à être partagé.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div class="glow g1"></div><div class="glow g2"></div>
+        <div class="kicker">Contact</div>
+        <h2>Envie de voir à quoi ressemblerait votre site ?</h2>
+        <p class="sub">Parlez-moi de votre activité via la messagerie de la plateforme où vous m'avez trouvé : je vous réponds rapidement avec une proposition claire.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#offre">Revoir les tarifs <span class="arr">→</span></a>
+          <a class="btn btn-ghost" href="#realisations">Revoir les réalisations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Swan — Création de sites internet</span><span>Sites vitrines pour commerces, artisans et indépendants</span></div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- fond « gradient mesh » qui suit la souris ---- */
+  const cv = document.getElementById('mesh'), ctx = cv.getContext('2d');
+  let W, H, dpr;
+  const mouse = {x: .7, y: .3, tx: .7, ty: .3};
+  const blobs = [
+    {c:[245,233,212], r:.55, x:.15, y:.10, sx:.00013, sy:.00011, p:0},     // crème
+    {c:[255,154,90],  r:.42, x:.45, y:.05, sx:.00017, sy:.00009, p:1.3},   // orange
+    {c:[185,185,249], r:.50, x:.80, y:.20, sx:.00011, sy:.00015, p:2.1},   // lavande
+    {c:[83,58,253],   a:.32, r:.40, x:.65, y:.35, sx:.00015, sy:.00012, p:3.4},   // indigo
+    {c:[234,34,97],   a:.3, r:.32, x:.95, y:.05, sx:.00019, sy:.00010, p:4.2},   // ruby
+    {c:[249,107,238], r:.30, x:.30, y:.30, sx:.00012, sy:.00018, p:5.0},   // magenta
+  ];
+  function size(){
+    dpr = Math.min(devicePixelRatio || 1, 1.5);
+    W = cv.width = innerWidth * dpr * .5; H = cv.height = innerHeight * dpr * .5; // rendu à mi-résolution (flou naturel)
+  }
+  size(); addEventListener('resize', size);
+  addEventListener('pointermove', e => { mouse.tx = e.clientX / innerWidth; mouse.ty = e.clientY / innerHeight; });
+  function draw(t){
+    mouse.x += (mouse.tx - mouse.x) * .05; mouse.y += (mouse.ty - mouse.y) * .05;
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'source-over';
+    const m = Math.max(W,H);
+    blobs.forEach((b,i) => {
+      const k = (i % 2 ? 1 : -1) * (0.06 + i * .015);           // chaque tache réagit différemment à la souris
+      const x = (b.x + Math.sin(t*b.sx + b.p) * .08 + (mouse.x - .5) * k * 2.2) * W;
+      const y = (b.y + Math.cos(t*b.sy + b.p) * .07 + (mouse.y - .5) * k * 1.6) * H;
+      const r = b.r * m;
+      const g = ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0, `rgba(${b.c},${b.a||.5})`); g.addColorStop(1, `rgba(${b.c},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+    });
+    // tache indigo qui suit directement le curseur
+    const cx = mouse.x * W, cy = mouse.y * H, cr = .22 * m;
+    const g2 = ctx.createRadialGradient(cx,cy,0,cx,cy,cr);
+    g2.addColorStop(0,'rgba(102,94,253,.28)'); g2.addColorStop(1,'rgba(102,94,253,0)');
+    ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(cx,cy,cr,0,Math.PI*2); ctx.fill();
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  /* ---- halo autour du curseur ---- */
+  const halo = document.getElementById('halo');
+  addEventListener('pointermove', e => { halo.style.left = e.clientX + 'px'; halo.style.top = e.clientY + 'px'; });
+
+  /* ---- parallaxe des maquettes du hero ---- */
+  const stack = document.getElementById('stack');
+  if (!reduce && stack) addEventListener('pointermove', e => {
+    const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
+    stack.querySelectorAll('[data-depth]').forEach(el => {
+      const d = +el.dataset.depth;
+      el.style.transform = `translate3d(${-dx*d}px,${-dy*d}px,0) rotateY(${dx*6}deg) rotateX(${-dy*6}deg)`;
+    });
+  });
+
+  /* ---- inclinaison 3D des réalisations ---- */
+  document.querySelectorAll('.tilt').forEach(el => {
+    if (reduce) return;
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      el.style.transform = `perspective(1100px) rotateY(${x*8}deg) rotateX(${-y*8}deg) scale(1.015)`;
+    });
+    el.addEventListener('pointerleave', () => el.style.transform = '');
+    el.style.transition = 'transform .25s ease-out';
+  });
+
+  /* ---- apparition au scroll ---- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---- nav ---- */
+  const header = document.getElementById('top');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 10), {passive:true});
+  const burger = document.querySelector('.burger'), links = document.querySelector('.links');
+  burger.addEventListener('click', () => { const o = links.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+})();
+</script>
+</body>
+</html>
